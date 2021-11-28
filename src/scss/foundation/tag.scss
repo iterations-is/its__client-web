@@ -1,0 +1,11 @@
+@use '../variables';
+
+.tag {
+	border: 1px solid variables.$color-primary;
+	border-radius: 100px;
+	padding: variables.$s025 variables.$s150;
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: -0.5px;
+	display: inline-block;
+}

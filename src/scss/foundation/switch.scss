@@ -1,0 +1,64 @@
+@use '../variables';
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: variables.$s6;
+	height: variables.$s3;
+	cursor: pointer;
+
+	input {
+		width: 0;
+		height: 0;
+		opacity: 0;
+		appearance: none;
+
+		&:checked + .switch__inner {
+			background-color: variables.$color-asphalt-medium;
+
+			&:before {
+				transform: translateX(variables.$s3);
+			}
+		}
+	}
+
+	.switch__inner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: variables.$color-silver-light;
+		border-radius: 4px;
+		transition: 100ms;
+		margin: 0 !important;
+
+		&:before {
+			position: absolute;
+			content: '';
+			height: variables.$s250;
+			width: variables.$s250;
+			left: variables.$s025;
+			top: variables.$s025;
+			background-color: white;
+			border-radius: 2px;
+			transition: 100ms;
+		}
+	}
+}
+
+.field--state-element {
+	display: inline-flex;
+	align-items: flex-start;
+
+	.field-state-element {
+		&__control {
+			flex: 0 0 auto;
+		}
+
+		&__label {
+			margin-left: variables.$s1;
+			flex: 1 1 0;
+		}
+	}
+}

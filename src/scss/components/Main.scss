@@ -1,0 +1,11 @@
+@use '../variables';
+
+.main {
+	padding: variables.$s5;
+	//background-color: #f8f9fa;
+	min-height: 100vh;
+
+	& :first-child {
+		margin-top: 0;
+	}
+}

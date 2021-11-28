@@ -1,7 +1,17 @@
-import '../styles/globals.css'
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import 'src/scss/index.scss';
+import { PROJECT_TITLE } from 'src/constants';
 
-export default MyApp
+const App = ({ Component, pageProps }) => (
+	<>
+		<Head>
+			<title>{PROJECT_TITLE}</title>
+			<meta name="description" content="Iterations - Information System" />
+			<link rel="icon" href="/favicon.png" />
+		</Head>
+		<Component {...pageProps} />
+	</>
+);
+
+export default App;

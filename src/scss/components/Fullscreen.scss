@@ -1,0 +1,39 @@
+@use '../variables';
+
+.fullscreen {
+	user-select: none;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url('../../../public/images/bg.svg');
+	background-size: cover;
+	background-position: 50% 50%;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title {
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 50px;
+		font-weight: bold;
+		//color: #C53364;
+		//background: linear-gradient(#c53364, #622774);
+		background: linear-gradient(4deg, #3c1b43, #625b87);
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+		margin: variables.$s2 0 0;
+	}
+	&__subtitle {
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 11.3px;
+		margin: 0 0 variables.$s2;
+		color: #3c1b43;
+	}
+}
