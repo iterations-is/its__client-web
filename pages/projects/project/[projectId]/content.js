@@ -28,9 +28,11 @@ const ProjectSettings = () => {
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();
-	const project = useQuery('project', genGetProject(axiosAuth));
+	const project = useQuery('project' + projectId, genGetProject(axiosAuth, { projectId }), {
+		enabled: projectId !== undefined,
+	});
 
-	const parts = ['1af5bc05-74f3-4435-9371-faae120dd506'];
+	const parts = project?.data?.data?.payload?.projectParts ?? [];
 
 	return (
 		<>
@@ -41,8 +43,8 @@ const ProjectSettings = () => {
 				tabActive="content"
 			/>
 
-			{parts.map((partId) => (
-				<Part key={partId} projectId={projectId} partId={partId} />
+			{parts.map(({id }) => (
+				<Part key={id} projectId={projectId} partId={id} />
 			))}
 		</>
 	);

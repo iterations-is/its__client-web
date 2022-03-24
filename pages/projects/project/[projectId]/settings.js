@@ -9,7 +9,9 @@ const ProjectSettings = () => {
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();
-	const project = useQuery('project', genGetProject(axiosAuth));
+	const project = useQuery('project' + projectId, genGetProject(axiosAuth, { projectId }), {
+		enabled: projectId !== undefined,
+	});
 
 	return (
 		<>

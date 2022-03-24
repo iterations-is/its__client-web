@@ -1,24 +1,19 @@
 import Link from 'next/link';
 import { Header, Button, ProjectLine } from '../../src/components';
 import { useAuthorisation } from '../../src/hooks/useAuthorisation';
+import { useAxios } from "../../src/hooks";
+import { useQuery } from "react-query";
+import { genGetProjectsSelf } from "../../src/api";
 
-const projects = [
-	{
-		id: "cff75e57-dbc0-4802-8997-c8744e4e4e0d",
-		name: 'Project 1',
-		category: 'Category 1',
-		descriptionPublic: 'Description of project 1',
-	},
-	{
-		id: 2,
-		name: 'Project 2',
-		category: 'Category 2',
-		descriptionPublic: 'Description of project 2',
-	},
-];
+const projects = [];
 
 const ProjectsDashboard = () => {
 	useAuthorisation();
+
+	const { axiosAuth } = useAxios();
+	const projects = useQuery('projectsSelf', genGetProjectsSelf(axiosAuth));
+
+	const projectsList = projects?.data?.data?.payload ?? [];
 
 	return (
 		<>
@@ -32,7 +27,7 @@ const ProjectsDashboard = () => {
 			<h2>Last projects</h2>
 
 			<div>
-				{projects.map((project) => (
+				{projectsList.map((project) => (
 					<ProjectLine key={project.id} projectData={project} />
 				))}
 			</div>

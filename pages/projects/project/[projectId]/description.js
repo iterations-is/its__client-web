@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import { Header } from '../../../../src/components';
+import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'react-query';
+import { Header } from '../../../../src/components';
 import { genGetProject } from '../../../../src/api';
 import { Loading } from '../../../../src/components';
 import { genProjectMenuItems } from '../../../../src/constants';
@@ -10,7 +11,9 @@ const ProjectDescription = () => {
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();
-	const project = useQuery('project', genGetProject(axiosAuth));
+	const project = useQuery('project' + projectId, genGetProject(axiosAuth, { projectId }), {
+		enabled: projectId !== undefined,
+	});
 
 	return (
 		<>
@@ -21,7 +24,21 @@ const ProjectDescription = () => {
 				tabActive="description"
 			/>
 			<h2>Public description</h2>
-			<h2>Private description</h2>
+			{project.isLoading ? (
+				<Loading />
+			) : (
+				<div>
+					<ReactMarkdown>{project.data?.data?.payload?.descriptionPublic}</ReactMarkdown>
+				</div>
+			)}
+			<h2 className="mt-5">Private description</h2>
+			{project.isLoading ? (
+				<Loading />
+			) : (
+				<div>
+					<ReactMarkdown>{project.data?.data?.payload?.descriptionPrivate}</ReactMarkdown>
+				</div>
+			)}
 		</>
 	);
 };

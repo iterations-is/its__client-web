@@ -13,14 +13,21 @@ export const genPatchUpdateCategory =
 export const genDeleteCategory = (axios) => (categoryId) =>
 	axios.delete(`/projects-service/categories/${categoryId}`);
 
-export const genGetProject = (axios) => () =>
-	axios.get('https://jsonplaceholder.typicode.com/todos/1');
+export const genGetProjects = (axios) => () => axios.get(`/projects-service/projects`);
+
+export const genGetProjectsSelf = (axios) => () => axios.get(`/projects-service/projects/self`);
+
+export const genGetProject =
+	(axios, { projectId }) =>
+	() =>
+		axios.get(`/projects-service/projects/${projectId}`);
 
 export const genGetPart =
 	(axios, { projectId, partId }) =>
-	() => {
-		if (!projectId || !partId) {
-			return '';
-		}
-		return axios.get(`/projects-service/projects/${projectId}/parts/${partId}`);
-	};
+	() =>
+		axios.get(`/projects-service/projects/${projectId}/parts/${partId}`);
+
+export const genPostCreateProject =
+	(axios) =>
+	({ projectReq }) =>
+		axios.post('/projects-service/projects', projectReq);

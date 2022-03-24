@@ -1,0 +1,24 @@
+@use '../../scss/variables';
+
+.userBadge {
+   border: 1px solid variables.$line-separator;
+   //padding: variables.$s1;
+   border-radius: variables.$s1;
+   margin-bottom: variables.$s2;
+   overflow: hidden;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+
+   img {
+      width: variables.$s6;
+      height: variables.$s6;
+      //border-radius: variables.$s1;
+      margin-right: variables.$s1;
+
+   }
+
+   &Text {
+
+   }
+}

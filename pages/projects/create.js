@@ -1,11 +1,13 @@
-import { Header, Field } from '../../src/components';
+import { Header, Field, Loading } from '../../src/components';
 import { useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
-import { genGetCategories } from '../../src/api';
+import { useMutation, useQuery } from 'react-query';
+import { genGetCategories, genPostCreateProject } from '../../src/api';
 import { useAuthorisation, useAxios } from '../../src/hooks';
+import { useRouter } from 'next/router';
 
 const ProjectsCreate = () => {
 	useAuthorisation();
+	const router = useRouter();
 
 	const {
 		handleSubmit,
@@ -14,11 +16,23 @@ const ProjectsCreate = () => {
 	} = useForm();
 
 	const { axiosAuth } = useAxios();
-	const { isLoading, data } = useQuery('categories', genGetCategories(axiosAuth));
+	const qCategories = useQuery('categories', genGetCategories(axiosAuth));
+	const categoriesList = qCategories.data?.data?.payload ?? [];
 
-	const handleCreationSubmit = (data) => {
-		console.log(data);
+	const createProject = useMutation(genPostCreateProject(axiosAuth), {
+		onSuccess: (data) => {
+			const projectId = data?.data?.payload?.project?.id;
+			router.push(`/projects/project/${projectId}/description`);
+		},
+	});
+
+	const handleCreationSubmit = async (data) => {
+		console.log('data', data);
+		const a = await createProject.mutate({ projectReq: data });
+		console.log(`a`, a);
 	};
+
+	if (qCategories.isLoading) return <Loading />;
 
 	return (
 		<>
@@ -38,11 +52,18 @@ const ProjectsCreate = () => {
 						<Field.Select
 							name="category"
 							label="Category"
-							options={[
-								{ value: '1', label: 'Category 1' },
-								{ value: '2', label: 'Category 2' },
-								{ value: '3', label: 'Category 3' },
-							]}
+							options={categoriesList.map((c) => ({ value: c.id, label: c.name }))}
+							register={register}
+							errors={errors}
+						/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col">
+						<Field.TextArea
+							name="descriptionPublic"
+							label="Public description"
 							register={register}
 							errors={errors}
 						/>
@@ -62,14 +83,40 @@ const ProjectsCreate = () => {
 
 				<div className="row">
 					<div className="col">
-						<Field.TextArea
-							name="descriptionPublic"
-							label="Public description"
+						<Field.Checkbox
+							name="joinable"
+							label="Is joinable"
 							register={register}
 							errors={errors}
+							defaultChecked
+						/>
+					</div>
+					<div className="col">
+						<Field.Checkbox name="archived" label="Archived" register={register} errors={errors} />
+					</div>
+					<div className="col">
+						<Field.Checkbox
+							name="searchable"
+							label="Searchable"
+							register={register}
+							errors={errors}
+							defaultChecked
+						/>
+					</div>
+					<div className="col">
+						<Field.Checkbox
+							name="public"
+							label="Public"
+							register={register}
+							errors={errors}
+							defaultChecked
 						/>
 					</div>
 				</div>
+
+				<button className="btn btn-primary" type="submit">
+					Save
+				</button>
 			</form>
 		</>
 	);

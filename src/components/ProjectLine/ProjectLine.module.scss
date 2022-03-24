@@ -5,7 +5,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: stretch;
-	padding: variables.$s1 0;
+	padding: variables.$s2;
 	border-bottom: 1px solid variables.$line-separator;
 
 	cursor: pointer;
@@ -25,5 +25,10 @@
 	}
 
 	&Detail {
+		padding-top: variables.$s2;
+
+		:last-child {
+			margin-bottom: 0;
+		}
 	}
 }

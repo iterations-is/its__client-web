@@ -1,4 +1,4 @@
-import { Header } from '../src/components';
+import { Header, Loading } from '../src/components';
 import { useAuthorisation, useAxios } from '../src/hooks';
 import { useMutation, useQuery } from 'react-query';
 import { genDeleteSelf, genGetSelf } from '../src/api';
@@ -14,6 +14,7 @@ const Help = () => {
 		<>
 			<Header title="Help" subtitle="some useful information" />
 			<h2>Account information (JSON)</h2>
+			{selfInfo.isLoading && <Loading />}
 			<pre>
 				<code>{JSON.stringify(selfInfo.data?.data?.payload, null, 2)}</code>
 			</pre>
