@@ -1,0 +1,26 @@
+@use '../../scss/variables';
+
+.header {
+	margin-bottom: variables.$s5;
+
+	h1 + &Line,
+	h6 + &Line {
+		margin-top: variables.$s5;
+	}
+
+	&Line {
+		border-bottom: 1px solid variables.$line-separator;
+		margin-left: -1 * variables.$s5;
+		margin-right: -1 * variables.$s5;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	h6 {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		opacity: 0.5;
+	}
+}

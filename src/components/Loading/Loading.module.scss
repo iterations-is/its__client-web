@@ -1,0 +1,18 @@
+@use '../../scss/variables';
+
+.loader {
+   display: flex;
+   justify-content: center;
+   margin: variables.$s5 0;
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loaderIcon {
+	animation: spin;
+	color: variables.$color-primary;
+}

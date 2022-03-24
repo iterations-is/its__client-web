@@ -1,0 +1,27 @@
+@use '../../scss/variables';
+
+.notification {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   padding: variables.$s2 0;
+   border-bottom: 1px solid variables.$line-separator;
+
+   cursor: pointer;
+
+   &:first-child {
+      border-top: 1px solid variables.$line-separator;
+   }
+
+   &:hover {
+      background-color: whitesmoke;
+   }
+
+   &Summary {
+   }
+
+   &Time {
+      font-size: small;
+   }
+}

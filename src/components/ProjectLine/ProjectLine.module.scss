@@ -1,0 +1,29 @@
+@use '../../scss/variables';
+
+.projectLine {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	padding: variables.$s1 0;
+	border-bottom: 1px solid variables.$line-separator;
+
+	cursor: pointer;
+
+	&:first-child {
+		border-top: 1px solid variables.$line-separator;
+	}
+
+	&:hover {
+		background-color: whitesmoke;
+	}
+
+	&Summary {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&Detail {
+	}
+}

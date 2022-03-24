@@ -1,12 +1,14 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export const NavigationItem = ({ item }) => (
-	<li>
-		<Link href={item.link}>
-			<a>
+export const NavigationItem = ({ item }) => {
+	const router = useRouter();
+
+	return (
+		<li>
+			<div className="menu-item" onClick={item.handleClick({ router })}>
 				<span className="navigation__icon">{item.icon}</span>
 				<span>{item.name}</span>
-			</a>
-		</Link>
-	</li>
-);
+			</div>
+		</li>
+	);
+};

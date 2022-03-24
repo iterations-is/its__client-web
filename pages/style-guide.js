@@ -4,8 +4,11 @@ import { MdSync, MdTaskAlt } from 'react-icons/md';
 
 import { Navigation, Tag } from 'src/components';
 import { PROJECT_TITLE } from 'src/constants';
+import { useAuthorisation } from "../src/hooks";
 
 const StyleGuide = () => {
+	useAuthorisation();
+
 	return (
 		<>
 			<Head>

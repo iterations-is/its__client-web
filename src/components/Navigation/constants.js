@@ -10,41 +10,69 @@ import {
 
 export const MenuItemsTop = [
 	{
-		link: '/style-guide',
-		icon: <MdStyle />,
-		name: 'Style Guide',
-	},
-	{
-		link: '/projects',
 		icon: <MdManageSearch />,
 		name: 'Search Projects',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/projects/search');
+			},
 	},
 	{
-		link: '/user-projects',
 		icon: <MdPrecisionManufacturing />,
 		name: 'User Projects',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/projects/dashboard');
+			},
 	},
 	{
-		link: '/notifications',
 		icon: <MdNotifications />,
 		name: 'Notifications',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/notifications/overview');
+			},
 	},
 	{
-		link: '/admin',
 		icon: <MdAdminPanelSettings />,
 		name: 'Admin Panel',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/admin/home');
+			},
 	},
 	{
-		link: '/help',
 		icon: <MdSupport />,
 		name: 'Help',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/help');
+			},
+	},
+	{
+		icon: <MdStyle />,
+		name: 'Style Guide',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/style-guide');
+			},
 	},
 ];
 
 export const MenuItemsBottom = [
 	{
-		link: '/',
 		icon: <MdLogout />,
 		name: 'Sign Out',
+		handleClick:
+			({ router }) =>
+			() => {
+				router.push('/');
+			},
 	},
 ];

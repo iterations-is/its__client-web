@@ -1,0 +1,11 @@
+@use '../../scss/variables';
+
+.monitoringStatusLine {
+	//margin-bottom: variables.$s1;
+   padding: variables.$s3 0;
+   border-bottom: 1px solid variables.$line-separator;
+
+   &:last-child {
+      border-bottom: none;
+   }
+}
