@@ -1,13 +1,15 @@
 import Head from 'next/head';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ToastContainer } from 'react-toastify';
+import { PROJECT_TITLE } from '../src/constants';
+import { Layout } from '../src/layouts';
+import { queryClient } from '../src/query/client';
+import { AxiosProvider } from '../src/hooks';
 
 import 'animate.css';
 import 'src/scss/index.scss';
-import { PROJECT_TITLE } from 'src/constants';
-import { Layout } from '../src/layouts';
-import { QueryClientProvider } from 'react-query';
-import { queryClient } from '../src/query/client';
-import { AxiosProvider } from '../src/hooks/useAxios';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({ Component, pageProps }) => {
 	const PageLayout = Component.Layout || Layout.Vertical;
@@ -27,6 +29,7 @@ const App = ({ Component, pageProps }) => {
 					</PageLayout>
 				</AxiosProvider>
 			</QueryClientProvider>
+			<ToastContainer />
 		</>
 	);
 };

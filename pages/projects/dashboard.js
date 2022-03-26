@@ -1,15 +1,13 @@
-import Link from 'next/link';
-import { Header, Button, ProjectLine } from '../../src/components';
-import { useAuthorisation } from '../../src/hooks/useAuthorisation';
-import { useAxios } from "../../src/hooks";
-import { useQuery } from "react-query";
-import { genGetProjectsSelf } from "../../src/api";
-
-const projects = [];
+import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
+import { Header, FormButton, ProjectLine } from '../../src/components';
+import { useAuthorisation, useAxios } from '../../src/hooks';
+import { genGetProjectsSelf } from '../../src/api';
 
 const ProjectsDashboard = () => {
 	useAuthorisation();
 
+	const router = useRouter();
 	const { axiosAuth } = useAxios();
 	const projects = useQuery('projectsSelf', genGetProjectsSelf(axiosAuth));
 
@@ -22,7 +20,7 @@ const ProjectsDashboard = () => {
 				subtitle="projects created by the user and projects with contribution"
 			/>
 			<h2>Create a new project</h2>
-			<Button text="Create project" link="/projects/create" />
+			<FormButton onClick={() => router.push('/projects/create')}>Create project</FormButton>
 
 			<h2>Last projects</h2>
 

@@ -20,6 +20,13 @@ export const saveCredentialsFromResponse = ({ accessToken, refreshToken }) => {
 	localStorage.setItem('refreshTokenExpirationTime', tokenRefreshPayload?.exp * 1000);
 };
 
+export const removeCredentials = () => {
+	localStorage.removeItem('accessToken');
+	localStorage.removeItem('refreshToken');
+	localStorage.removeItem('accessTokenExpirationTime');
+	localStorage.removeItem('refreshTokenExpirationTime');
+};
+
 export const AxiosProvider = ({ children }) => {
 	const router = useRouter();
 
@@ -27,7 +34,7 @@ export const AxiosProvider = ({ children }) => {
 		let queue = [];
 		let isRefetching = false;
 
-		const axiosUnauth = axios.create({
+		const axiosUnAuth = axios.create({
 			baseURL: URI_BASE,
 		});
 
@@ -57,7 +64,7 @@ export const AxiosProvider = ({ children }) => {
 				return new Promise((res, rej) => {
 					const token = selectRefreshToken();
 
-					axiosUnauth('/auth-service/refresh', {
+					axiosUnAuth('/auth-service/refresh', {
 						method: 'POST',
 						baseURL: URI_BASE,
 						headers: { Authorization: `Bearer ${token}` },
@@ -97,7 +104,7 @@ export const AxiosProvider = ({ children }) => {
 
 		return {
 			axiosAuth,
-			axiosUnauth,
+			axiosUnAuth,
 		};
 	}, []);
 

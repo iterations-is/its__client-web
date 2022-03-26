@@ -1,16 +1,30 @@
-import { Header, Loading, Notification } from '../../src/components';
-import { useAuthorisation } from '../../src/hooks/useAuthorisation';
-import { useAxios } from '../../src/hooks/useAxios';
+import { useState } from 'react';
+import { Header, Loading, Notification, PaginationViewer } from '../../src/components';
+import { useAuthorisation, useAxios } from '../../src/hooks';
 import { useQuery } from 'react-query';
 import { genGetNotifications } from '../../src/api';
 
 const Overview = () => {
 	useAuthorisation();
 
-	const { axiosAuth } = useAxios();
-	const { isLoading, data } = useQuery('notifications', genGetNotifications(axiosAuth));
+	const [page, setPage] = useState(1);
+	const [pageSize] = useState(10);
+	const [pageCount, setPageCount] = useState(0);
 
-	const notifications = data?.data?.payload ?? [];
+	const { axiosAuth } = useAxios();
+	const { isLoading, data } = useQuery(
+		['notifications', page, pageSize],
+		genGetNotifications(axiosAuth, page, pageSize),
+		{
+			staleTime: 3000,
+			keepPreviousData: true,
+			onSuccess: (data) => {
+				setPageCount(Math.ceil(data?.data?.payload?.pagination?.total / pageSize));
+			},
+		},
+	);
+
+	const notifications = data?.data?.payload?.notifications ?? [];
 
 	return (
 		<div>
@@ -19,16 +33,15 @@ const Overview = () => {
 				subtitle="user notification from all projects and information system"
 			/>
 			{isLoading && <Loading />}
-
 			{notifications.length === 0 && !isLoading && (
 				<div className="text-center">
 					<h6>No notifications</h6>
 				</div>
 			)}
-			{notifications &&
-				notifications.map((notification) => (
-					<Notification key={notification.id} {...notification} />
-				))}
+			{notifications.map((notification) => (
+				<Notification key={notification.id} {...notification} />
+			))}
+			<PaginationViewer totalPages={pageCount} page={page} setPage={setPage} />
 		</div>
 	);
 };

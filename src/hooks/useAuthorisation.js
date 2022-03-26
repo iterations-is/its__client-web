@@ -10,18 +10,24 @@ export const selectRefreshTokenTime = () => localStorage.getItem('refreshTokenEx
 export const isAccessTokenExpired = () => +selectAccessTokenTime() < new Date().getTime() + 1000;
 export const isRefreshTokenExpired = () => +selectRefreshTokenTime() < new Date().getTime() + 1000;
 
-export const useAuthorisation = () => {
+export const useAuthorisation = (isRequired = true) => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (hasAccessToken() && !isAccessTokenExpired()) {
-			return;
+		if (!isRequired && hasRefreshToken() && !isRefreshTokenExpired()) {
+			return router.push(`/projects/dashboard`);
 		}
 
-		if (!hasRefreshToken() || isRefreshTokenExpired()) {
-			// access token is wrong, refresh token is wrong
-			// redirect to signin with callback
-			router.push(`/?callback=${window.location.pathname}`);
+		if (isRequired) {
+			if (hasAccessToken() && !isAccessTokenExpired()) {
+				return;
+			}
+
+			if (!hasRefreshToken() || isRefreshTokenExpired()) {
+				// access token is wrong, refresh token is wrong
+				// redirect to signin with callback
+				router.push(`/?callback=${window.location.pathname}`);
+			}
 		}
 	}, []);
 };

@@ -1,5 +1,5 @@
-export const genGetNotifications = (axios) => () =>
-	axios.get('/communication-service/notifications');
+export const genGetNotifications = (axios, page, pageSize) => () =>
+	axios.get('/communication-service/notifications?page=' + page + '&pageSize=' + pageSize);
 
 export const genPatchNotification = (axios) => (notificationId) =>
 	axios.patch(`/communication-service/notifications/${notificationId}`);

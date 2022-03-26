@@ -7,6 +7,7 @@ import {
 	MdStyle,
 	MdSupport,
 } from 'react-icons/md';
+import { removeCredentials } from '../../hooks';
 
 export const MenuItemsTop = [
 	{
@@ -72,6 +73,7 @@ export const MenuItemsBottom = [
 		handleClick:
 			({ router }) =>
 			() => {
+				removeCredentials();
 				router.push('/');
 			},
 	},

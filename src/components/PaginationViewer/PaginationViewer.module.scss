@@ -1,0 +1,26 @@
+@use '../../scss/variables';
+
+.pagination {
+	display: flex;
+	margin: variables.$s3 0;
+	justify-content: center;
+}
+
+.paginationItem {
+	margin-left: variables.$s1;
+	cursor: pointer;
+	width: variables.$s5;
+	height: variables.$s5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 100px;
+
+	&:hover {
+		border: 2px solid variables.$line-separator;
+	}
+}
+
+.active {
+	border: 2px solid variables.$color-primary;
+}
