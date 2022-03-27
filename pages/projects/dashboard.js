@@ -4,6 +4,8 @@ import { Header, FormButton, ProjectLine, PaginationViewer } from '../../src/com
 import { useAuthorisation, useAxios } from '../../src/hooks';
 import { genGetProjectsSelf } from '../../src/api';
 import { useState } from 'react';
+import { FaArchive, FaUserPlus } from 'react-icons/fa';
+import { FormSearchProject } from "../../src/containers";
 
 const ProjectsDashboard = () => {
 	useAuthorisation();
@@ -12,11 +14,22 @@ const ProjectsDashboard = () => {
 	const [pageSize] = useState(10);
 	const [pageCount, setPageCount] = useState(0);
 
+	const [projectName, setProjectName] = useState('');
+	const [projectCategory, setProjectCategory] = useState('');
+
 	const router = useRouter();
 	const { axiosAuth } = useAxios();
 	const projects = useQuery(
-		['projectsSelf', page, pageSize],
-		genGetProjectsSelf(axiosAuth, page, pageSize),
+		['projectsSelf', page, pageSize, projectName, projectCategory],
+		genGetProjectsSelf(
+			axiosAuth,
+			new URLSearchParams({
+				page,
+				pageSize,
+				name: projectName,
+				category: projectCategory,
+			}),
+		),
 		{
 			staleTime: 3000,
 			keepPreviousData: true,
@@ -35,16 +48,32 @@ const ProjectsDashboard = () => {
 				subtitle="projects created by the user and projects with contribution"
 			/>
 			<h2>Create a new project</h2>
-			<FormButton onClick={() => router.push('/projects/create')}>Create project</FormButton>
-
-			<h2>Last projects</h2>
-
-			<div>
-				{projectsList.map((project) => (
-					<ProjectLine key={project.id} projectData={project} />
-				))}
-				<PaginationViewer totalPages={pageCount} page={page} setPage={setPage} />
+			<div className="row mb-3">
+				<div className="col">
+					<FormButton onClick={() => router.push('/projects/create')}>Create project</FormButton>
+				</div>
 			</div>
+			<h2>Options</h2>
+			<FormSearchProject setProjectCategory={setProjectCategory} setProjectName={setProjectName} />
+			<div className="mb-3" />
+
+			<h2>Legend</h2>
+			<div className="row mb-4">
+				<div className="col">
+					<FaUserPlus color="black" /> / <FaUserPlus color="lightgray" /> - anybody can / cannot
+					join project
+				</div>
+				<div className="col">
+					<FaArchive color="black" /> / <FaArchive color="lightgray" /> - project is / is not
+					archived
+				</div>
+			</div>
+
+			<h2>User projects</h2>
+			{projectsList.map((project) => (
+				<ProjectLine key={project.id} projectData={project} />
+			))}
+			<PaginationViewer totalPages={pageCount} page={page} setPage={setPage} />
 		</>
 	);
 };

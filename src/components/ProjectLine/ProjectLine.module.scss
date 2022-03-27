@@ -25,10 +25,28 @@
 	}
 
 	&Detail {
-		padding-top: variables.$s2;
+		margin-top: variables.$s2;
+		padding: variables.$s2;
+		background: white;
 
 		:last-child {
 			margin-bottom: 0;
+		}
+
+		&Icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: variables.$s1;
+			$size: 35px;
+			width: $size;
+			height: $size;
+
+			&Extra {
+				background-color: white;
+				border: 1px solid variables.$line-separator;
+				border-radius: variables.$s5;
+			}
 		}
 	}
 }

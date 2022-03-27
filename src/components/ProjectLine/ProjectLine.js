@@ -18,30 +18,34 @@ export const ProjectLine = ({ projectData }) => {
 				<div>
 					<h5 className="mb-0">{name}</h5>
 					<div className="d-flex">
-						<div className="fst-italic fs-6 me-3">Created: {new Date(createdAt).toLocaleString()}</div>
+						<div className="fst-italic fs-6 me-3">
+							Created: {new Date(createdAt).toLocaleString()}
+						</div>
 						<div>Category: {category?.name}</div>
 					</div>
 				</div>
 
-				<div>
-					<FaUserPlus color={joinable ? 'black' : 'lightgray'} />
-					<FaArchive color={archived ? 'black' : 'lightgray'} />
-					<span
-						className="btn btn-primary"
+				<div className="ms-4 d-flex justify-content-end align-items-center">
+					<div className={style.projectLineDetailIcon}>
+						<FaUserPlus color={joinable ? 'black' : 'lightgray'} />
+					</div>
+					<div className={style.projectLineDetailIcon}>
+						<FaArchive color={archived ? 'black' : 'lightgray'} />
+					</div>
+					<div
+						className={`${style.projectLineDetailIcon} ${style.projectLineDetailIconExtra}`}
 						onClick={(e) => {
 							e.stopPropagation();
 							setIsOpen(!isOpen);
 						}}>
 						<HiDotsHorizontal />
-					</span>
+					</div>
 				</div>
 			</div>
 
 			{isOpen && (
 				<div className={style.projectLineDetail}>
-					<div className="project-line__description">
-						<ReactMarkdown children={descriptionPublic} />
-					</div>
+					<ReactMarkdown children={descriptionPublic || "The project has no public description."} />
 				</div>
 			)}
 		</div>
