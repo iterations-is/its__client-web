@@ -1,5 +1,9 @@
 @use '../variables';
 
+.form-control {
+	min-height: 40px;
+}
+
 @keyframes rotating {
 	from {
 		transform: rotate(360deg);

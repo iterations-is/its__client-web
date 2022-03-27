@@ -7,6 +7,9 @@
 }
 
 .formButton {
+	display: inline-flex;
+	height: 40px;
+
 	&Icon {
 		&Left {
 			margin-right: variables.$s1;

@@ -20,10 +20,17 @@ export const FormButton = ({
 
 	return (
 		<button
-			type={submit ? 'submit' : undefined}
+			type={submit ? 'submit' : 'button'}
 			disabled={disabled}
 			onClick={onClick}
-			className={'btn btn--primary ' + (full ? 'btn--full-width' : '') + ' ' + className}>
+			className={
+				'btn btn--primary ' +
+				(full ? 'btn--full-width' : '') +
+				' ' +
+				(className ? className : '') +
+				' ' +
+				style.formButton
+			}>
 			{iconOnly && iconOnlyIcon}
 			{!iconOnly && (
 				<>

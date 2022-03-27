@@ -6,6 +6,10 @@ export const joiErrorToString = (error) => {
       return 'Value is too short';
     case 'string.max':
       return 'Value is too long';
+    case 'number.min':
+      return 'Value is too low';
+    case 'number.max':
+      return 'Value is too high';
     case 'string.empty':
       return 'Value is empty';
   }

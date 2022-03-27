@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { MdSync, MdTaskAlt } from 'react-icons/md';
 
-import { Navigation, Tag } from 'src/components';
+import { FormButton, Navigation, Tag } from "src/components";
 import { PROJECT_TITLE } from 'src/constants';
 import { useAuthorisation } from "../src/hooks";
 
@@ -58,6 +58,10 @@ const StyleGuide = () => {
 				</ul>
 			</aside>
 			<main className="main">
+				<FormButton>Save</FormButton>
+				<FormButton loading>Save</FormButton>
+
+
 				<h1>Style Guide</h1>
 				<h2>Style Guide</h2>
 				<h3>Style Guide</h3>
