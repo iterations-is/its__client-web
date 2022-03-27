@@ -1,17 +1,32 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import { Header, FormButton, ProjectLine } from '../../src/components';
+import { Header, FormButton, ProjectLine, PaginationViewer } from '../../src/components';
 import { useAuthorisation, useAxios } from '../../src/hooks';
 import { genGetProjectsSelf } from '../../src/api';
+import { useState } from 'react';
 
 const ProjectsDashboard = () => {
 	useAuthorisation();
 
+	const [page, setPage] = useState(1);
+	const [pageSize] = useState(10);
+	const [pageCount, setPageCount] = useState(0);
+
 	const router = useRouter();
 	const { axiosAuth } = useAxios();
-	const projects = useQuery('projectsSelf', genGetProjectsSelf(axiosAuth));
+	const projects = useQuery(
+		['projectsSelf', page, pageSize],
+		genGetProjectsSelf(axiosAuth, page, pageSize),
+		{
+			staleTime: 3000,
+			keepPreviousData: true,
+			onSuccess: (data) => {
+				setPageCount(Math.ceil(data?.data?.payload?.pagination?.total / pageSize));
+			},
+		},
+	);
 
-	const projectsList = projects?.data?.data?.payload ?? [];
+	const projectsList = projects?.data?.data?.payload?.projects ?? [];
 
 	return (
 		<>
@@ -28,6 +43,7 @@ const ProjectsDashboard = () => {
 				{projectsList.map((project) => (
 					<ProjectLine key={project.id} projectData={project} />
 				))}
+				<PaginationViewer totalPages={pageCount} page={page} setPage={setPage} />
 			</div>
 		</>
 	);

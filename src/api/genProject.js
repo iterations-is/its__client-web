@@ -13,9 +13,11 @@ export const genPatchUpdateCategory =
 export const genDeleteCategory = (axios) => (categoryId) =>
 	axios.delete(`/projects-service/categories/${categoryId}`);
 
-export const genGetProjects = (axios) => () => axios.get(`/projects-service/projects`);
+export const genGetProjects = (axios, page, pageSize) => () =>
+	axios.get(`/projects-service/projects?page=` + page + '&pageSize=' + pageSize);
 
-export const genGetProjectsSelf = (axios) => () => axios.get(`/projects-service/projects/self`);
+export const genGetProjectsSelf = (axios, page, pageSize) => () =>
+	axios.get(`/projects-service/projects/self?page=` + page + '&pageSize=' + pageSize);
 
 export const genGetProject =
 	(axios, { projectId }) =>
