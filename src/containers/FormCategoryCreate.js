@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAxios } from '../hooks';
-import { genDeleteCategory, genPatchUpdateCategory, genPostCreateCategory } from '../api';
+import { genPostCreateCategory } from '../api';
 import { Field, FormButton } from '../components';
 import { queryClient } from '../query/client';
 
@@ -21,6 +21,7 @@ export const FormCategoryCreate = ({ id, categoryName }) => {
 	const rqCreateCategory = useMutation(genPostCreateCategory(axiosAuth), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('categories');
+			toast.success('Category was created');
 			form.reset();
 		},
 	});

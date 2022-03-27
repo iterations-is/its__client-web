@@ -31,6 +31,14 @@ export const FormCategoryManage = ({ id, categoryName }) => {
 			queryClient.invalidateQueries('categories');
 			toast.success('Category was deleted');
 		},
+		onError: (data) => {
+			if (data.response?.data?.code === 'CATEGORY_HAS_PROJECTS') {
+				toast.error('Category has projects and cannot be deleted');
+				return;
+			}
+
+			toast.error('Category was not deleted');
+		},
 	});
 
 	const handleUpdateCategory = (values) => {
@@ -47,13 +55,7 @@ export const FormCategoryManage = ({ id, categoryName }) => {
 	return (
 		<form onSubmit={form.handleSubmit(handleUpdateCategory)}>
 			<div className="d-flex align-items-center mb-2 me-1">
-				<Field.Input
-					name="name"
-					type="text"
-					form={form}
-					defaultValue={categoryName}
-					mb=""
-				/>
+				<Field.Input name="name" type="text" form={form} defaultValue={categoryName} mb="" />
 				<FormButton
 					submit
 					loading={rqUpdateCategory.isLoading}
