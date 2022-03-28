@@ -9,9 +9,9 @@ import { queryClient } from '../../../../src/query/client';
 import { toast } from 'react-toastify';
 import { FaUserPlus } from 'react-icons/fa';
 import { ProjectSidebar } from '../../../../src/containers';
-import { isUserProjectLeader } from "../../../../src/utils";
+import { isUserProjectLeader } from '../../../../src/utils';
 
-const ProjectRoleSection = ({ role, projectId }) => {
+const ProjectRoleSection = ({ role, projectId, joinable }) => {
 	const { axiosAuth } = useAxios();
 
 	const rqJoinTeam = useMutation(genPatchJoinTeam(axiosAuth, projectId), {
@@ -39,7 +39,8 @@ const ProjectRoleSection = ({ role, projectId }) => {
 				</div>
 			))}
 			{(role.capacity === -1 || role.projectRoleAssignments.length < role.capacity) &&
-				role.name !== 'Leader' && (
+				role.name !== 'Leader' &&
+				joinable && (
 					<FormButton
 						icons={[undefined, <FaUserPlus />]}
 						disabled={rqJoinTeam.isLoading}
@@ -97,7 +98,7 @@ const ProjectTeam = () => {
 
 			<h2>Members and capacity</h2>
 			{projectRoles.map((role) => (
-				<ProjectRoleSection key={role.id} projectId={projectId} role={role} />
+				<ProjectRoleSection key={role.id} projectId={projectId} role={role} joinable={joinable} />
 			))}
 
 			{isInTeam && (
