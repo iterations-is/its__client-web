@@ -3,7 +3,7 @@ import { Header, Loading } from '../../../../src/components';
 import { useQuery } from 'react-query';
 import { genGetPart, genGetProject } from '../../../../src/api';
 import { genProjectMenuItems } from '../../../../src/constants';
-import { useAxios } from '../../../../src/hooks';
+import { useAuthorisation, useAxios } from '../../../../src/hooks';
 
 const Part = ({ projectId, partId }) => {
 	const { axiosAuth } = useAxios();
@@ -25,6 +25,8 @@ const Part = ({ projectId, partId }) => {
 };
 
 const ProjectSettings = () => {
+	useAuthorisation();
+
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();
@@ -43,7 +45,7 @@ const ProjectSettings = () => {
 				tabActive="content"
 			/>
 
-			{parts.map(({id }) => (
+			{parts.map(({ id }) => (
 				<Part key={id} projectId={projectId} partId={id} />
 			))}
 		</>

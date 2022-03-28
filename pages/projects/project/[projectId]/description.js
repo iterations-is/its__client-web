@@ -5,9 +5,11 @@ import { Header } from '../../../../src/components';
 import { genGetProject } from '../../../../src/api';
 import { Loading } from '../../../../src/components';
 import { genProjectMenuItems } from '../../../../src/constants';
-import { useAxios } from '../../../../src/hooks';
+import { useAuthorisation, useAxios } from '../../../../src/hooks';
 
 const ProjectDescription = () => {
+	useAuthorisation();
+
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();

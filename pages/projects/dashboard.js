@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import { Header, FormButton, ProjectLine, PaginationViewer } from '../../src/components';
+import { Header, FormButton, ProjectLine, PaginationViewer, Loading } from '../../src/components';
 import { useAuthorisation, useAxios } from '../../src/hooks';
 import { genGetProjectsSelf } from '../../src/api';
 import { useState } from 'react';
 import { FaArchive, FaUserPlus } from 'react-icons/fa';
-import { FormSearchProject } from "../../src/containers";
+import { FormSearchProject } from '../../src/containers';
 
 const ProjectsDashboard = () => {
 	useAuthorisation();
@@ -70,6 +70,8 @@ const ProjectsDashboard = () => {
 			</div>
 
 			<h2>User projects</h2>
+			{projects.isLoading && <Loading />}
+			{projectsList.length === 0 && <p className="text-center mt-4">No projects found</p>}
 			{projectsList.map((project) => (
 				<ProjectLine key={project.id} projectData={project} />
 			))}

@@ -3,9 +3,11 @@ import { Header } from '../../../../src/components';
 import { useQuery } from 'react-query';
 import { genGetProject } from '../../../../src/api';
 import { genProjectMenuItems } from '../../../../src/constants';
-import { useAxios } from '../../../../src/hooks';
+import { useAuthorisation, useAxios } from '../../../../src/hooks';
 
 const ProjectSettings = () => {
+	useAuthorisation();
+
 	const router = useRouter();
 	const { projectId } = router.query;
 	const { axiosAuth } = useAxios();

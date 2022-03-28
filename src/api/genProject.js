@@ -33,3 +33,9 @@ export const genPostCreateProject =
 	(axios) =>
 	({ projectReq }) =>
 		axios.post('/projects-service/projects', projectReq);
+
+export const genPatchJoinTeam = (axios, projectId) => (roleId) =>
+	axios.patch(`/projects-service/projects/${projectId}/team/${roleId}`);
+
+export const genDeleteLeaveTeam = (axios, projectId) => () =>
+	axios.delete(`/projects-service/projects/${projectId}/team`);

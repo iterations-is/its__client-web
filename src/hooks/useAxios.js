@@ -18,6 +18,7 @@ export const saveCredentialsFromResponse = ({ accessToken, refreshToken }) => {
 
 	localStorage.setItem('accessTokenExpirationTime', tokenAccessPayload?.exp * 1000);
 	localStorage.setItem('refreshTokenExpirationTime', tokenRefreshPayload?.exp * 1000);
+	localStorage.setItem('userId', tokenAccessPayload?.payload?.id);
 };
 
 export const removeCredentials = () => {
@@ -25,6 +26,7 @@ export const removeCredentials = () => {
 	localStorage.removeItem('refreshToken');
 	localStorage.removeItem('accessTokenExpirationTime');
 	localStorage.removeItem('refreshTokenExpirationTime');
+	localStorage.removeItem('userId');
 };
 
 export const AxiosProvider = ({ children }) => {

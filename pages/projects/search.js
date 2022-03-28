@@ -64,6 +64,7 @@ const ProjectsSearch = () => {
 			<h2>Results</h2>
 			{projects.isLoading && <Loading />}
 
+			{projectsList.length === 0 && <p className="text-center mt-4">No projects found</p>}
 			{projectsList.map((project) => (
 				<ProjectLine key={project.id} projectData={project} />
 			))}
