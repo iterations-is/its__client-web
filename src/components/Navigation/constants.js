@@ -4,7 +4,6 @@ import {
 	MdManageSearch,
 	MdNotifications,
 	MdPrecisionManufacturing,
-	MdStyle,
 	MdSupport,
 } from 'react-icons/md';
 import { removeCredentials } from '../../hooks';
@@ -53,15 +52,6 @@ export const MenuItemsTop = [
 			({ router }) =>
 			() => {
 				router.push('/help');
-			},
-	},
-	{
-		icon: <MdStyle />,
-		name: 'Style Guide',
-		handleClick:
-			({ router }) =>
-			() => {
-				router.push('/style-guide');
 			},
 	},
 ];

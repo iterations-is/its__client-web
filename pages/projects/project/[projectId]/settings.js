@@ -4,6 +4,8 @@ import { useQuery } from 'react-query';
 import { genGetProject } from '../../../../src/api';
 import { genProjectMenuItems } from '../../../../src/constants';
 import { useAuthorisation, useAxios } from '../../../../src/hooks';
+import { ProjectSidebar } from "../../../../src/containers";
+import { isUserProjectLeader } from "../../../../src/utils";
 
 const ProjectSettings = () => {
 	useAuthorisation();
@@ -18,14 +20,17 @@ const ProjectSettings = () => {
 	return (
 		<>
 			<Header
-				title="Project name"
+				title={project.data?.data?.payload?.name ?? '-'}
 				subtitle="settings of the project"
 				tabs={genProjectMenuItems(projectId)}
 				tabActive="settings"
+				isUserLeader={isUserProjectLeader(project)}
 			/>
 			<h2>Set</h2>
 		</>
 	);
 };
+
+ProjectSettings.Sidebar = ProjectSidebar;
 
 export default ProjectSettings;

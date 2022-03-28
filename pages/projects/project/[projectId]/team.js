@@ -8,6 +8,8 @@ import { IoInfiniteSharp } from 'react-icons/io5';
 import { queryClient } from '../../../../src/query/client';
 import { toast } from 'react-toastify';
 import { FaUserPlus } from 'react-icons/fa';
+import { ProjectSidebar } from '../../../../src/containers';
+import { isUserProjectLeader } from "../../../../src/utils";
 
 const ProjectRoleSection = ({ role, projectId }) => {
 	const { axiosAuth } = useAxios();
@@ -86,10 +88,11 @@ const ProjectTeam = () => {
 	return (
 		<>
 			<Header
-				title="Project name"
+				title={rqGetProject.data?.data?.payload?.name ?? '-'}
 				subtitle="team and vacancies"
 				tabs={genProjectMenuItems(projectId)}
 				tabActive="team"
+				isUserLeader={isUserProjectLeader(rqGetProject)}
 			/>
 
 			<h2>Members and capacity</h2>
@@ -111,5 +114,7 @@ const ProjectTeam = () => {
 		</>
 	);
 };
+
+ProjectTeam.Sidebar = ProjectSidebar;
 
 export default ProjectTeam;

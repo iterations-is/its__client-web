@@ -53,13 +53,16 @@
 			justify-content: space-between;
 			align-items: center;
 
-			:first-child {
+			span:first-child {
 				margin-right: variables.$s1;
 				flex: 1 1 0;
 			}
 
 			svg {
-				color: variables.$color-turquoise-light;
+				margin: 0;
+			}
+
+			.authority-mark {
 				font-size: 20px;
 			}
 		}
@@ -68,4 +71,8 @@
 
 .sidebar + .main {
 	margin-left: 400px;
+}
+
+.authority-mark {
+	color: variables.$color-turquoise-light;
 }

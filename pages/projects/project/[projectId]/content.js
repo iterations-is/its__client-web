@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { genGetPart, genGetProject } from '../../../../src/api';
 import { genProjectMenuItems } from '../../../../src/constants';
 import { useAuthorisation, useAxios } from '../../../../src/hooks';
+import { isUserProjectLeader } from "../../../../src/utils";
 
 const Part = ({ projectId, partId }) => {
 	const { axiosAuth } = useAxios();
@@ -39,10 +40,11 @@ const ProjectSettings = () => {
 	return (
 		<>
 			<Header
-				title="Project name"
+				title={project.data?.data?.payload?.name ?? '-'}
 				subtitle="content of the project"
 				tabs={genProjectMenuItems(projectId)}
 				tabActive="content"
+				isUserLeader={isUserProjectLeader(project)}
 			/>
 
 			{parts.map(({ id }) => (

@@ -6,6 +6,8 @@ import { genGetProject } from '../../../../src/api';
 import { Loading } from '../../../../src/components';
 import { genProjectMenuItems } from '../../../../src/constants';
 import { useAuthorisation, useAxios } from '../../../../src/hooks';
+import { ProjectSidebar } from '../../../../src/containers';
+import { isUserProjectLeader } from '../../../../src/utils';
 
 const ProjectDescription = () => {
 	useAuthorisation();
@@ -17,32 +19,40 @@ const ProjectDescription = () => {
 		enabled: projectId !== undefined,
 	});
 
+	const descPublic = project.data?.data?.payload?.descriptionPublic;
+	const descPrivate = project.data?.data?.payload?.descriptionPrivate;
+
 	return (
 		<>
 			<Header
-				title="Project name"
+				title={project.data?.data?.payload?.name ?? '-'}
 				subtitle="basic info about the project"
 				tabs={genProjectMenuItems(projectId)}
 				tabActive="description"
+				isUserLeader={isUserProjectLeader(project)}
 			/>
 			<h2>Public description</h2>
 			{project.isLoading ? (
 				<Loading />
 			) : (
 				<div>
-					<ReactMarkdown>{project.data?.data?.payload?.descriptionPublic}</ReactMarkdown>
+					{descPublic && <ReactMarkdown>{descPublic}</ReactMarkdown>}
+					{!descPublic && <p>No public description</p>}
 				</div>
 			)}
 			<h2 className="mt-5">Private description</h2>
 			{project.isLoading ? (
 				<Loading />
 			) : (
-				<div>
-					<ReactMarkdown>{project.data?.data?.payload?.descriptionPrivate}</ReactMarkdown>
-				</div>
+				<>
+					{descPrivate && <ReactMarkdown>{descPrivate}</ReactMarkdown>}
+					{!descPrivate && <p>No public description</p>}
+				</>
 			)}
 		</>
 	);
 };
+
+ProjectDescription.Sidebar = ProjectSidebar;
 
 export default ProjectDescription;

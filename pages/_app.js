@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({ Component, pageProps }) => {
 	const PageLayout = Component.Layout || Layout.Vertical;
+	const PageSidebar = Component.Sidebar || null;
 
 	return (
 		<>
@@ -24,7 +25,7 @@ const App = ({ Component, pageProps }) => {
 			<QueryClientProvider client={queryClient}>
 				<AxiosProvider>
 					<ReactQueryDevtools initialIsOpen={false} />
-					<PageLayout>
+					<PageLayout Sidebar={PageSidebar}>
 						<Component {...pageProps} />
 					</PageLayout>
 				</AxiosProvider>
