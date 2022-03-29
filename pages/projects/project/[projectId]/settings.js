@@ -4,8 +4,8 @@ import { useQuery } from 'react-query';
 import { genGetProject } from '../../../../src/api';
 import { genProjectMenuItems } from '../../../../src/constants';
 import { useAuthorisation, useAxios } from '../../../../src/hooks';
-import { ProjectSidebar } from "../../../../src/containers";
-import { isUserProjectLeader } from "../../../../src/utils";
+import { FormUpdateProject, ProjectSidebar } from '../../../../src/containers';
+import { isUserProjectLeader } from '../../../../src/utils';
 
 const ProjectSettings = () => {
 	useAuthorisation();
@@ -26,7 +26,7 @@ const ProjectSettings = () => {
 				tabActive="settings"
 				isUserLeader={isUserProjectLeader(project)}
 			/>
-			<h2>Set</h2>
+			<FormUpdateProject />
 		</>
 	);
 };

@@ -34,8 +34,26 @@ export const genPostCreateProject =
 	({ projectReq }) =>
 		axios.post('/projects-service/projects', projectReq);
 
+export const genPatchUpdateProject =
+	(axios, projectId) =>
+	({ projectReq }) =>
+		axios.patch(`/projects-service/projects/${projectId}`, projectReq);
+
 export const genPatchJoinTeam = (axios, projectId) => (roleId) =>
 	axios.patch(`/projects-service/projects/${projectId}/team/${roleId}`);
 
 export const genDeleteLeaveTeam = (axios, projectId) => () =>
 	axios.delete(`/projects-service/projects/${projectId}/team`);
+
+export const genPostCreateRole =
+	(axios, projectId) =>
+	({ roleReq }) =>
+		axios.post(`/projects-service/projects/${projectId}/roles`, roleReq);
+
+export const genPatchUpdateRole =
+	(axios, projectId, roleId) =>
+	({ roleReq }) =>
+		axios.patch(`/projects-service/projects/${projectId}/roles/${roleId}`, roleReq);
+
+export const genDeleteRole = (axios, projectId, roleId) => () =>
+	axios.delete(`/projects-service/projects/${projectId}/roles/${roleId}`);

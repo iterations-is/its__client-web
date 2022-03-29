@@ -5,3 +5,4 @@ export * from './FormSignUp';
 export * from './FormResetPassword';
 export * from './FormSearchProject';
 export * from './ProjectSidebar';
+export * from './FormUpdateProject';

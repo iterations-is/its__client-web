@@ -1,7 +1,7 @@
 import { Wrapper } from './Wrapper';
 
 export const FieldInput = (props) => {
-	const { form, type, name, placeholder, ...rest } = props;
+	const { form, type, name, placeholder, className, ...rest } = props;
 
 	return (
 		<Wrapper {...props}>
@@ -12,7 +12,7 @@ export const FieldInput = (props) => {
 				id={name}
 				{...form.register(name)}
 				{...rest}
-				className="form-control"
+				className={"form-control " + className}
 			/>
 		</Wrapper>
 	);

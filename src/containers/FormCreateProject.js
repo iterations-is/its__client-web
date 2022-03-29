@@ -121,7 +121,6 @@ export const FormCreateProject = () => {
 									className="form-control"
 								/>
 							</Wrapper>
-							{console.log(form.formState?.errors?.roles?.[index]?.capacity) && ''}
 							<Wrapper
 								className="flex-grow-1 me-1"
 								errorCustom={form.formState?.errors?.roles?.[index]?.capacity}>

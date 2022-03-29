@@ -29,8 +29,6 @@ export const ProjectSidebar = () => {
 		enabled: projectId !== undefined,
 	});
 
-	console.log(project?.data?.data?.payload);
-
 	const isArchived = project?.data?.data?.payload?.archived;
 	const category = project?.data?.data?.payload?.category?.name;
 	const created = project?.data?.data?.payload?.createdAt;
@@ -49,7 +47,7 @@ export const ProjectSidebar = () => {
 			<span className="sidebar__title">Leaders</span>
 			<ul>
 				{leaders.map((leader) => (
-					<li>
+					<li key={leader.userId}>
 						<Username userId={leader.userId} />
 					</li>
 				))}
@@ -59,7 +57,7 @@ export const ProjectSidebar = () => {
 					<span className="sidebar__title">Vacancies</span>
 					<ul>
 						{notLeaders.map((role) => (
-							<li>
+							<li key={role.id}>
 								<span>{role.name}</span>
 								<Tag>
 									{role.projectRoleAssignments.length} /{' '}
