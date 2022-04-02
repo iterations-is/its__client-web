@@ -1,3 +1,17 @@
+export const genGetInterpreters = (axios) => () => axios.get(`/interpreters-service/interpreters`);
+export const genPostInterpreter =
+	(axios) =>
+	({ interpreterReq }) =>
+		axios.post(`/interpreters-service/interpreters`, interpreterReq);
+export const genGetInterpreter =
+	(axios, { name, version }) =>
+	() =>
+		axios.get(`/interpreters-service/interpreters/${name}/${version}`);
+export const genDeleteInterpreter =
+	(axios, { id }) =>
+	() =>
+		axios.delete(`/interpreters-service/interpreters/${id}`);
+
 export const genGetCategories = (axios) => () => axios.get('/projects-service/categories');
 
 export const genPostCreateCategory =
@@ -28,6 +42,16 @@ export const genGetPart =
 	(axios, { projectId, partId }) =>
 	() =>
 		axios.get(`/projects-service/projects/${projectId}/parts/${partId}`);
+
+export const genPostPart =
+	(axios, { projectId }) =>
+	(partReq) =>
+		axios.post(`/projects-service/projects/${projectId}/parts`, partReq);
+
+export const genPatchPart =
+	(axios, { projectId, partId }) =>
+	(partReq) =>
+		axios.patch(`/projects-service/projects/${projectId}/parts/${partId}`, partReq);
 
 export const genPostCreateProject =
 	(axios) =>
