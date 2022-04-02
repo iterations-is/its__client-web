@@ -80,7 +80,7 @@ export const FormCreateProject = () => {
 						form={form}
 						label="Category"
 						options={categoriesList.map((c) => ({ value: c.id, label: c.name }))}
-						defaultValue={categoriesList[0].id}
+						defaultValue={categoriesList?.[0]?.id}
 					/>
 				</div>
 			</div>
