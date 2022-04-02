@@ -45,7 +45,9 @@ export const ProjectLine = ({ projectData }) => {
 
 			{isOpen && (
 				<div className={style.projectLineDetail}>
-					<ReactMarkdown children={descriptionPublic || "The project has no public description."} />
+					<ReactMarkdown>
+						{descriptionPublic || 'The project has no public description.'}
+					</ReactMarkdown>
 				</div>
 			)}
 		</div>

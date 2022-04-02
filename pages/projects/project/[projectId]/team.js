@@ -42,7 +42,7 @@ const ProjectRoleSection = ({ role, projectId, joinable }) => {
 				role.name !== 'Leader' &&
 				joinable && (
 					<FormButton
-						icons={[undefined, <FaUserPlus />]}
+						icons={[undefined, <FaUserPlus key="ri" />]}
 						disabled={rqJoinTeam.isLoading}
 						loading={rqJoinTeam.isLoading}
 						onClick={() => {

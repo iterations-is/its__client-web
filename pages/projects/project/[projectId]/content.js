@@ -46,7 +46,7 @@ const Part = ({ projectId, partId }) => {
 				setIsRendererLoaded(true);
 			})();
 		}
-	}, [interpreterUrl]);
+	}, [interpreterUrl, partId]);
 
 	const Comp = global?.components?.[partId];
 
@@ -57,13 +57,15 @@ const Part = ({ projectId, partId }) => {
 			<div className="col flex-grow-1">{Comp && <Comp {...partContent} />}</div>
 			<div className="col flex-grow-0 flex-column">
 				<FormButton
-					icons={[<MdEdit />]}
+					icons={[<MdEdit key="ri" />]}
 					iconOnly={true}
-					onClick={() => router.push(`/projects/project/${projectId}/parts/${partId}/${partSha}/edit`)}
+					onClick={() =>
+						router.push(`/projects/project/${projectId}/parts/${partId}/${partSha}/edit`)
+					}
 					className="mb-1"
 				/>
 				<FormButton
-					icons={[<ImBin2 />]}
+					icons={[<ImBin2 key="ri" />]}
 					iconOnly={true}
 					onClick={() => router.push(`/projects/project/${projectId}/parts/create`)}
 				/>
@@ -99,7 +101,7 @@ const ProjectContent = () => {
 
 			<div className="text-center">
 				<FormButton
-					icons={[undefined, <MdPostAdd />]}
+					icons={[undefined, <MdPostAdd key="ri" />]}
 					onClick={() => router.push(`/projects/project/${projectId}/parts/create`)}>
 					Create a part
 				</FormButton>
