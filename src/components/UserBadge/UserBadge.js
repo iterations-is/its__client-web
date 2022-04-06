@@ -1,7 +1,6 @@
 import { useAxios } from '../../hooks';
 import { useQuery } from 'react-query';
 import { genGetUser } from '../../api';
-import Image from 'next/image';
 import style from './UserBadge.module.scss';
 
 export const UserBadge = ({ userId }) => {
@@ -14,7 +13,7 @@ export const UserBadge = ({ userId }) => {
 
 	return (
 		<div className={style.userBadge}>
-			<Image src={userData.gravatar} alt="Avatar" />
+			<img src={userData.gravatar} alt="Avatar" />
 			<div className={style.userBadgeText}>
 				<div>
 					{userData.name} ({userData.username})
