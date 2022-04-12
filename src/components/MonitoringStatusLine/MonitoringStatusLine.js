@@ -2,10 +2,9 @@ import style from './MonitoringStatusLine.module.scss';
 import { MdCheckCircle, MdError } from 'react-icons/md';
 
 export const MonitoringStatusLine = ({ msStatus }) => {
-	const {
-		status: fetchStatus,
-		value: { name, status: msStatusCode, data: { name: msName, version, description } = {} },
-	} = msStatus;
+	const { status: fetchStatus, value } = msStatus;
+	const { name, status: msStatusCode, data } = value ?? {};
+	const { name: msName, version, description } = data ?? {};
 
 	return (
 		<div className={style.monitoringStatusLine}>
