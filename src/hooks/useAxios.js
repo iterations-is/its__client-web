@@ -80,6 +80,7 @@ export const AxiosProvider = ({ children }) => {
 							return axiosAuth(originalRequest).then((data) => res(data));
 						})
 						.catch((err) => {
+							removeCredentials();
 							router.push(`/?callback=${window.location.pathname}`);
 							queue.forEach((item) => item.rej(err));
 							return rej(err);
