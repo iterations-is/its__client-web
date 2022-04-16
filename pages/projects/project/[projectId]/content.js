@@ -64,11 +64,11 @@ const Part = ({ projectId, partId }) => {
 					}
 					className="mb-1"
 				/>
-				<FormButton
-					icons={[<ImBin2 key="ri" />]}
-					iconOnly={true}
-					onClick={() => router.push(`/projects/project/${projectId}/parts/create`)}
-				/>
+				{/*<FormButton*/}
+				{/*	icons={[<ImBin2 key="ri" />]}*/}
+				{/*	iconOnly={true}*/}
+				{/*	onClick={() => router.push(`/projects/project/${projectId}/parts/create`)}*/}
+				{/*/>*/}
 			</div>
 		</div>
 	);
